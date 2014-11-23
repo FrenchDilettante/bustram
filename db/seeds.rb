@@ -1,6 +1,7 @@
 Dir.mktmpdir do |dir|
   system "unzip ./db/data.zip -d #{dir}"
 
+  ActiveRecord::Base.connection.execute 'truncate locations;'
   ActiveRecord::Base.connection.execute 'truncate routes;'
   ActiveRecord::Base.connection.execute 'truncate stops;'
 
