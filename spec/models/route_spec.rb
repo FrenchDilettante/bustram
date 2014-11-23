@@ -9,6 +9,8 @@ RSpec.describe Route, :type => :model do
 
       expect(route.long_name).to eq('DJF Murs ERIGNE <> AquaVita <> Monplaisir')
       expect(route.code).to eq('3d-131')
+
+      expect(Route.all.count).to be(1)
     end
 
   end

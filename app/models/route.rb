@@ -8,6 +8,8 @@ class Route < ActiveRecord::Base
     route.short_name = parts[1]
     route.long_name = parts[2][1, parts[2].length-2].split.join ' '
 
+    route.save!
+
     route
   end
 
