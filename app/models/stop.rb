@@ -9,18 +9,17 @@ class Stop < ActiveRecord::Base
     stop = Stop.find_by_name parsed_name
     if stop.nil?
       stop = Stop.new
+      stop.name = parsed_name
+      stop.save!
     end
 
     location = Location.new
-
-    stop.name = parsed_name
 
     location.code = parts[0]
     location.lat = parts[4]
     location.lon = parts[5]
     stop.locations << location
 
-    stop.save!
     location.save!
 
     stop
