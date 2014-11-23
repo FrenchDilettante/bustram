@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 
 gem 'coffee-rails', '~> 4.0.0'
+gem 'coveralls', require: false
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'rails', '4.1.7'
