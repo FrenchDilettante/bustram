@@ -1,6 +1,8 @@
 bustram-angers.fr
 =================
 
+[![Build Status](https://travis-ci.org/manudwarf/bustram.svg?branch=master)](https://travis-ci.org/manudwarf/bustram) [![Coverage Status](https://img.shields.io/coveralls/manudwarf/bustram.svg)](https://coveralls.io/r/manudwarf/bustram?branch=master)
+
 Dev setup
 ---------
 
