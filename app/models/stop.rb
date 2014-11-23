@@ -1,5 +1,7 @@
 class Stop < ActiveRecord::Base
 
+  has_many :locations
+
   def self.import line
     stop = Stop.new
 
