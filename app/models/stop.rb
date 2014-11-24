@@ -26,4 +26,12 @@ class Stop < ActiveRecord::Base
     stop
   end
 
+  def self.search name
+    if name.blank?
+      self.all
+    else
+      self.where 'slug like :name', name: "%#{name.parameterize}%"
+    end
+  end
+
 end

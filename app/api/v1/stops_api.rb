@@ -14,7 +14,7 @@ module V1
       desc 'Return list of stops'
 
       get do
-        present Stop.all, with: V1::StopsApi::Entities::Stop
+        present Stop.search(params[:name]), with: V1::StopsApi::Entities::Stop
       end
     end
   end
