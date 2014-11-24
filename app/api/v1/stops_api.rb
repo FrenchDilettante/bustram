@@ -3,11 +3,17 @@ module V1
     version 'v1'
     format :json
 
+    module Entities
+      class Stop < Grape::Entity
+        expose :name
+      end
+    end
+
     resource :stops do
       desc 'Return list of stops'
 
       get do
-        Stop.all
+        present Stop.all, with: V1::StopsApi::Entities::Stop
       end
     end
   end

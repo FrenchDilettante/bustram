@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'coveralls', require: false
+gem 'grape', '0.9.0'
+gem 'grape-entity', '0.4.4'
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
 gem 'rails', '4.1.7'
@@ -21,5 +23,3 @@ end
 group :development, :test do
   gem 'rspec-rails', '3.1.0'
 end
-
-gem 'grape', '0.9.0'
