@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'coffee-rails', '~> 4.0.0'
 gem 'coveralls', require: false
+gem 'friendly_id', '5.0.4'
 gem 'grape', '0.9.0'
 gem 'grape-entity', '0.4.4'
 gem 'jbuilder', '~> 2.0'

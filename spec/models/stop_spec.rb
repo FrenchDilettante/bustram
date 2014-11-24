@@ -9,6 +9,7 @@ RSpec.describe Stop, :type => :model do
 
       expect(stop.name).to eq('Foch Maison Bleue')
       expect(stop.locations.length).to be(1)
+      expect(stop.slug).to eq('foch-maison-bleue')
       
       location = stop.locations.first
       expect(location.code).to eq('1FMBL')

@@ -5,6 +5,7 @@ module V1
 
     module Entities
       class Stop < Grape::Entity
+        expose :slug, as: :id
         expose :name
       end
     end
