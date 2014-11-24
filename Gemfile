@@ -21,3 +21,5 @@ end
 group :development, :test do
   gem 'rspec-rails', '3.1.0'
 end
+
+gem 'grape', '0.9.0'

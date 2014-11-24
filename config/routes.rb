@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :stops
+  mount V1::Root => '/api'
 
 end
