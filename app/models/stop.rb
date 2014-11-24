@@ -28,9 +28,9 @@ class Stop < ActiveRecord::Base
 
   def self.search name
     if name.blank?
-      self.all
+      self.all.includes :locations
     else
-      self.where 'slug like :name', name: "%#{name.parameterize}%"
+      self.where('slug like :name', name: "%#{name.parameterize}%").includes :locations
     end
   end
 

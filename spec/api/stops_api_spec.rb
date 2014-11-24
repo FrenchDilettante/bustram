@@ -15,7 +15,7 @@ describe V1::StopsApi do
       expect(response.status).to eq(200)
       parsed = JSON.parse(response.body)
       expect(parsed.length).to eq(2)
-      expect(parsed[0].keys).to eq(['id', 'name'])
+      expect(parsed[0].keys).to eq(['id', 'name', 'locations'])
       expect(parsed[0]['id']).to eq('stop-test')
     end
 
