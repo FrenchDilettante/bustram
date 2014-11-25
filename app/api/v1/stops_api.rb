@@ -20,11 +20,15 @@ module V1
     end
 
     resource :stops do
-      desc 'Return list of stops'
 
-      get do
-        present Stop.search(params[:name]), with: V1::StopsApi::Entities::Stop
+      desc 'Return list of stops'
+      params do
+        requires :q, type: String, regexp: /.{3,}/, desc: 'q must have at least 3 characters'
       end
+      get do
+        present Stop.search(params[:q]), with: V1::StopsApi::Entities::Stop
+      end
+
     end
   end
 end
