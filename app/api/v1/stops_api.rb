@@ -3,6 +3,10 @@ module V1
     version 'v1'
     format :json
 
+    rescue_from ActiveRecord::RecordNotFound do
+      rack_response('{"message": "Not found", "status": 404}', 404)
+    end
+
     module Entities
       class Location < Grape::Entity
         expose :code, as: :id
@@ -27,6 +31,14 @@ module V1
       end
       get do
         present Stop.search(params[:q]), with: V1::StopsApi::Entities::Stop
+      end
+
+      desc 'Return a stop'
+      params do
+        requires :id, type: String, desc: 'Stop id is required'
+      end
+      get ':id' do
+        present Stop.friendly.find(params[:id]), with: V1::StopsApi::Entities::Stop
       end
 
     end
