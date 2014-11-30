@@ -7,30 +7,22 @@ module V1
       rack_response('{"message": "Not found", "status": 404}', 404)
     end
 
-    module Entities
-      class Location < Grape::Entity
-        expose :code, as: :id
-        expose :coordinates do
-          expose :lat
-          expose :lon
-        end
-      end
-
-      class Stop < Grape::Entity
-        expose :slug, as: :id
-        expose :name
-        expose :locations, using: V1::StopsApi::Entities::Location, as: :locations
-      end
-    end
-
     resource :stops do
 
       desc 'Return list of stops'
       params do
-        requires :q, type: String, regexp: /.{3,}/, desc: 'q must have at least 3 characters'
+        optional :q, type: String, regexp: /.{3,}/, desc: 'q must have at least 3 characters'
       end
       get do
-        present Stop.search(params[:q]), with: V1::StopsApi::Entities::Stop
+        stops = nil
+        search_query = params[:q]
+
+        if search_query.blank? or search_query.length < 3
+          stops = Stop.all
+        else
+          stops = Stop.search search_query
+        end
+        present stops, with: V1::Entities::Stop
       end
 
       desc 'Return a stop'
@@ -38,7 +30,7 @@ module V1
         requires :id, type: String, desc: 'Stop id is required'
       end
       get ':id' do
-        present Stop.friendly.find(params[:id]), with: V1::StopsApi::Entities::Stop
+        present Stop.friendly.find(params[:id]), with: V1::Entities::FullStop
       end
 
     end
