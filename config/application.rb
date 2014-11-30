@@ -23,5 +23,8 @@ module Bustram
     # Grape API configuration
     config.paths.add "app/api", glob: "**/*.rb"
     config.autoload_paths += Dir["#{Rails.root}/app/api/*"]
+
+    # Use bower assets
+    config.assets.paths << Rails.root.join('vendor', 'assets')
   end
 end
