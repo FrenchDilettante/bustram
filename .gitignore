@@ -15,4 +15,9 @@
 # For convenience, hide actual config files
 config/database.yml
 config/secrets.yml
+
+# Deployment files you don't want to see on a github repository
 config/deploy/*
+
+# Bower dependencies
+vendor/assets/

@@ -1,0 +1,14 @@
+{
+  "name": "bustram",
+  "version": "0.0.0",
+  "homepage": "https://github.com/manudwarf/bustram",
+  "authors": [
+    "Emmanuel Bourgerie <manu@bourgerie.fr>"
+  ],
+  "license": "Apache",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "~3.3.1",
+    "angular": "~1.3.4"
+  }
+}
