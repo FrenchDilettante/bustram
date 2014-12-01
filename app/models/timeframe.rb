@@ -1,5 +1,14 @@
 class Timeframe < ActiveRecord::Base
 
+  def self.current_weekday
+    Time.now.strftime('%A').downcase
+  end
+
+  def self.current_timeframes
+    self.where("current_date >= start_date and current_date <= end_date
+                and #{self.current_weekday} = true")
+  end
+
   def self.import line
     parts = line.split ','
 

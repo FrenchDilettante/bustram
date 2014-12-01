@@ -25,4 +25,28 @@ RSpec.describe Timeframe, :type => :model do
 
   end
 
+  describe 'current_timeframes' do
+
+    it 'should get the timeframe for the current date' do
+      timeframeToday = Timeframe.create start_date: Date.yesterday, end_date: Date.tomorrow, monday: true, tuesday: true, wednesday: true, thursday: true, friday: true, saturday: true, sunday: true
+      timeframeFuture = Timeframe.create start_date: 2.days.from_now, end_date: 10.days.from_now, monday: true, tuesday: true, wednesday: true, thursday: true, friday: true, saturday: true, sunday: true
+
+      timeframes = Timeframe.current_timeframes
+      expect(timeframes.count).to be(1)
+      expect(timeframes.first.id).to be(timeframeToday.id)
+    end
+
+    it 'should get the timeframe for the current day of week' do
+      incorrectTimeframe = Timeframe.create start_date: Date.yesterday, end_date: Date.tomorrow, monday: false, tuesday: false, wednesday: false, thursday: false, friday: false, saturday: false, sunday: false
+      correctTimeframe = Timeframe.create start_date: Date.yesterday, end_date: Date.tomorrow, monday: true, tuesday: true, wednesday: true, thursday: true, friday: true, saturday: true, sunday: true
+
+      correctTimeframe[Timeframe.current_weekday.to_sym] = true
+
+      timeframes = Timeframe.current_timeframes
+      expect(timeframes.count).to eq(1)
+      expect(timeframes.first.id).to be(correctTimeframe.id)
+    end
+
+  end
+
 end
