@@ -11,6 +11,9 @@ module V1
     class Route < Grape::Entity
       expose :short_name, as: :id
       expose :long_name, as: :name
+      expose :type do |route|
+        route.transport_type == 'B' ? 'bus' : 'tramway'
+      end
     end
 
     class Stop < Grape::Entity
