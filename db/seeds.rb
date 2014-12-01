@@ -38,4 +38,15 @@ Dir.mktmpdir do |dir|
 
   puts "#{Stop.all.count} stops imported"
 
+
+  puts 'Parsing trips'
+
+  File.open("#{dir}/trips.txt", "r").each_line do |line|
+    if line.start_with? 'route_id' then next end
+
+    Trip.import line
+  end
+
+  puts "#{Trip.all.count} trips imported"
+
 end
