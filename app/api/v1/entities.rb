@@ -8,6 +8,11 @@ module V1
       end
     end
 
+    class Route < Grape::Entity
+      expose :short_name, as: :id
+      expose :long_name, as: :name
+    end
+
     class Stop < Grape::Entity
       expose :slug, as: :id
       expose :name
