@@ -5,7 +5,7 @@ class Timeframe < ActiveRecord::Base
   end
 
   def self.current_timeframes
-    self.where("current_date >= start_date and current_date <= end_date and #{self.current_weekday} = true")
+    self.where("current_date between start_date and end_date and #{self.current_weekday} = true")
   end
 
   def self.import line
