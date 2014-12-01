@@ -16,8 +16,9 @@ gem 'turbolinks'
 
 # Capistrano gems
 gem 'capistrano-bundler', '1.1.3'
-gem 'capistrano-rvm', '0.1.2'
+gem 'capistrano-bower', '1.0.0'
 gem 'capistrano-rails', '1.1.2'
+gem 'capistrano-rvm', '0.1.2'
 
 group :development do
   gem 'spring'

@@ -1,8 +1,11 @@
 require 'capistrano/bundler'
+require 'capistrano/bower'
 
 lock '3.2.1'
 
 set :application, 'bustram'
+set :bower_flags, '--quiet --config.interactive=false'
+set :bower_roles, :web
 set :repo_url, 'git@github.com:manudwarf/bustram.git'
 
 namespace :deploy do
