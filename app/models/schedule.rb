@@ -17,10 +17,30 @@ class Schedule < ActiveRecord::Base
     schedule
   end
 
+  def self.next stop
+    current_timeframes = Timeframe.current_timeframes.map {|tf| tf.id}
+    self.
+      joins(:trip).
+      where('stop_id = :stop_id and departure_time >= :departure_time and trips.timeframe_id in (:timeframes)', {
+        stop_id: stop.id,
+        departure_time: self.current_time,
+        timeframes: current_timeframes
+      }).
+      limit(10).
+      order('departure_time').
+      includes(:trip => [:route])
+  end
+
   private
 
   def self.parse_time departure
     departure.split(':').join('').to_i
+  end
+
+  private
+
+  def self.current_time
+    Time.now.strftime '%H%M%S'
   end
 
 end

@@ -16,6 +16,16 @@ module V1
       end
     end
 
+    class Schedule < Grape::Entity
+      expose :departure_time
+      expose :route_id do |schedule|
+        schedule.trip.route.short_name
+      end
+      expose :headsign do |schedule|
+        schedule.trip.headsign
+      end
+    end
+
     class Stop < Grape::Entity
       expose :slug, as: :id
       expose :name

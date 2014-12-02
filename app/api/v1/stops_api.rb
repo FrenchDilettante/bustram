@@ -33,6 +33,12 @@ module V1
         present Stop.friendly.find(params[:id]), with: V1::Entities::FullStop
       end
 
+      desc 'return the next schedules'
+      get ':id/schedules' do
+        stop = Stop.friendly.find params[:id]
+        present Schedule.next(stop), with: V1::Entities::Schedule
+      end
+
     end
   end
 end

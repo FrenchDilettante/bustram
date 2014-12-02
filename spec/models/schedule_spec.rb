@@ -24,4 +24,12 @@ RSpec.describe Schedule, :type => :model do
 
   end
 
+  describe 'next' do
+
+    it 'should provide the next schedules available' do
+      # @TODO cannot be tested without complete data set
+    end
+
+  end
+
 end

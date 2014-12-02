@@ -47,4 +47,18 @@ describe V1::StopsApi do
 
   end
 
+  describe 'GET /api/v1/stops/:id/schedules' do
+
+    it 'should get the next schedules' do
+      get '/api/v1/stops/stop-test/schedules'
+
+      expect(response.status).to be(200)
+      # @TODO cannot be tested without complete data set
+      # parsed = JSON.parse response.body
+      # expect(parsed.length).to be(10)
+      # expect(parsed[0].keys).to eq(['departure_time', 'route_id', 'headsign'])
+    end
+
+  end
+
 end
