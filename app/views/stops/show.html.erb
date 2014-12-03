@@ -1,0 +1,11 @@
+<div ng-controller="StopController">
+  <h1><%= @stop.name %></h1>
+
+  <ul>
+    <li ng-repeat="schedule in schedules">
+      {{ schedule.route_id }}
+      {{ schedule.headsign }}
+      {{ schedule.departure_time | date : 'shortTime' }}
+    </li>
+  </ul>
+</div>

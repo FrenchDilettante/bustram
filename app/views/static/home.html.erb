@@ -4,12 +4,15 @@
          id="q"
          class="form-control"
          autocomplete="off"
+         autofocus
          ng-model="q"
          ng-model-options="{ debounce: {'default': 200, 'blur': 0} }" />
 
   <ul class="stop-list">
     <li ng-repeat="stop in stops">
-      {{ stop.name }}
+      <a ng-href="/arrets/{{ stop.id }}">
+        {{ stop.name }}
+      </a>
     </li>
   </ul>
 </div>
