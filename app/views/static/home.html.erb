@@ -1,1 +1,15 @@
-I will be back.
+<div ng-controller="SearchController">
+  <input type="text"
+         name="q"
+         id="q"
+         class="form-control"
+         autocomplete="off"
+         ng-model="q"
+         ng-model-options="{ debounce: {'default': 200, 'blur': 0} }" />
+
+  <ul class="stop-list">
+    <li ng-repeat="stop in stops">
+      {{ stop.name }}
+    </li>
+  </ul>
+</div>
