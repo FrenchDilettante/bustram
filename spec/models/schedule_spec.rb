@@ -32,4 +32,13 @@ RSpec.describe Schedule, :type => :model do
 
   end
 
+  describe 'parsed_departure_time' do
+
+    it 'should convert the departure_time in a Time object' do
+      schedule = Schedule.new departure_time: 123456
+      expect(schedule.parsed_departure_time.strftime '%H:%M:%S').to eq('12:34:56')
+    end
+
+  end
+
 end

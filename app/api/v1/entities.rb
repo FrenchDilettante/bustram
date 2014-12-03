@@ -17,7 +17,9 @@ module V1
     end
 
     class Schedule < Grape::Entity
-      expose :departure_time
+      expose :departure_time do |schedule|
+        schedule.parsed_departure_time
+      end
       expose :route_id do |schedule|
         schedule.trip.route.short_name
       end

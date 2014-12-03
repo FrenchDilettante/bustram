@@ -31,6 +31,14 @@ class Schedule < ActiveRecord::Base
       includes(:trip => [:route])
   end
 
+  def parsed_departure_time
+    departure_time = self.departure_time.to_s
+    hour = departure_time[0,2].to_i
+    min = departure_time[2,2].to_i
+    sec = departure_time[4,2].to_i
+    Time.now.change hour: hour, min: min, sec: sec
+  end
+
   private
 
   def self.parse_time departure
