@@ -7,6 +7,7 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.yml.sample config/secrets.yml
   - psql -c 'create database travis_ci_test' -U postgres
-  - npm install karma karma-jasmine
+  - npm install bower karma karma-jasmine karma-phantomjs-launcher
+  - bower install
 script:
   - node_modules/karma/bin/karma start --single-run
