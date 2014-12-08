@@ -21,3 +21,6 @@ config/deploy/*
 
 # Bower dependencies
 vendor/assets/
+
+# NPM modules
+node_modules/
