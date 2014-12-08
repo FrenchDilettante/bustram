@@ -32,7 +32,7 @@ class Schedule < ActiveRecord::Base
   end
 
   def parsed_departure_time
-    departure_time = self.departure_time.to_s
+    departure_time = '%06d' % self.departure_time
     hour = departure_time[0,2].to_i
     min = departure_time[2,2].to_i
     sec = departure_time[4,2].to_i
