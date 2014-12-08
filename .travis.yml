@@ -11,3 +11,4 @@ before_script:
   - bower install
 script:
   - node_modules/karma/bin/karma start --single-run
+  - bundle exec rspec
