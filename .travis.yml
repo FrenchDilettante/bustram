@@ -7,3 +7,6 @@ before_script:
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.yml.sample config/secrets.yml
   - psql -c 'create database travis_ci_test' -U postgres
+  - npm install karma
+script:
+  - karma start --single-run
