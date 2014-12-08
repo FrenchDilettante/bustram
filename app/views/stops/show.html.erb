@@ -1,11 +1,20 @@
 <div ng-controller="StopController">
   <h1><%= @stop.name %></h1>
 
-  <ul>
+  <ul class="stop-schedules">
     <li ng-repeat="schedule in schedules">
-      {{ schedule.route_id }}
-      {{ schedule.headsign }}
-      {{ schedule.departure_time | date : 'shortTime' }}
+      <span class="route">
+        {{ schedule.route_id }}
+      </span>
+      <span class="headsign">
+        {{ schedule.headsign }}
+      </span>
+      <span class="departure" ng-show="showDeparture" ng-click="toggleDisplay()">
+        {{ schedule.departure_time | date : 'shortTime' }}
+      </span>
+      <span class="estimated" ng-hide="showDeparture" ng-click="toggleDisplay()">
+        {{ estimatedTime(schedule.departure_time) | remaining }}
+      </span>
     </li>
   </ul>
 </div>
