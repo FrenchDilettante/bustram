@@ -20,7 +20,7 @@ module.controller('StopController',
     }
 
     $scope.estimatedTime = function (time) {
-      return Math.trunc((time - new Date()) / 60000);
+      return Math.floor((time - new Date()) / 60000);
     };
 
     $scope.toggleDisplay = function () {
@@ -35,8 +35,15 @@ module.controller('StopController',
 module.filter('remaining',
   function () {
     return function (remaining) {
-      var hours = Math.trunc(remaining / 60),
+      var hours = Math.floor(remaining / 60),
           mins = remaining % 60;
-      return (hours > 0 ? hours + 'h' : 0) + mins + 'm';
+
+      if (hours > 0) {
+        return hours + 'h';
+      } else if (mins > 0) {
+        return mins + 'm';
+      } else {
+        return 'maintenant';
+      }
     }
   });
