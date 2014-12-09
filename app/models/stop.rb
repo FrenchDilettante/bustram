@@ -27,7 +27,7 @@ class Stop < ActiveRecord::Base
   end
 
   def self.search name
-    self.where('slug like :name', name: "%#{name.parameterize}%")
+    self.where('slug like :name', name: "%#{name.parameterize}%").order(:name)
   end
 
 end
