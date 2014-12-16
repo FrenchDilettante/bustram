@@ -1,12 +1,15 @@
 <div ng-controller="SearchController">
-  <input type="text"
-         name="q"
-         id="q"
-         class="form-control"
-         autocomplete="off"
-         autofocus
-         ng-model="q"
-         ng-model-options="{ debounce: {'default': 200, 'blur': 0} }" />
+  <div class="form-group">
+    <%= label_tag :q, 'Chercher un arrêt' %>
+    <input type="text"
+           name="q"
+           id="q"
+           class="form-control"
+           autocomplete="off"
+           autofocus
+           ng-model="q"
+           ng-model-options="{ debounce: {'default': 200, 'blur': 0} }" />
+  </div>
 
   <ul class="stop-list">
     <li ng-repeat="stop in stops">

@@ -1,8 +1,8 @@
 module = angular.module('bustram.stops', []);
 
 module.controller('StopController',
-  ['$scope', '$http',
-  function ($scope, $http) {
+  ['$scope', '$http', '$timeout',
+  function ($scope, $http, $timeout) {
 
     function getCurrentStopId() {
       return location.pathname.split('/')[2];
@@ -17,6 +17,13 @@ module.controller('StopController',
             return schedule;
           });
         });
+
+      var date = new Date();
+      date.setMilliseconds(0);
+      date.setSeconds(0);
+      date.setMinutes(date.getMinutes() + 1);
+
+      $timeout(loadSchedules, date.getTime() - new Date().getTime());
     }
 
     $scope.estimatedTime = function (time) {

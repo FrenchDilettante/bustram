@@ -40,6 +40,11 @@ RSpec.describe Schedule, :type => :model do
 
       schedule = Schedule.new departure_time: 12345
       expect(schedule.parsed_departure_time.strftime '%H:%M:%S').to eq('01:23:45')
+
+      schedule = Schedule.new departure_time: 241234
+      parsed_departure_time = schedule.parsed_departure_time
+      expect(parsed_departure_time.strftime '%H:%M:%S').to eq('00:12:34')
+      expect(parsed_departure_time.day).to be(Time.now.day + 1)
     end
 
   end
