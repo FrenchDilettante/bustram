@@ -1,6 +1,8 @@
 Dir.mktmpdir do |dir|
   system "unzip ./db/data.zip -d #{dir}"
 
+  dir = dir + '/20141222-20150208'
+
   ActiveRecord::Base.transaction do
     ActiveRecord::Base.connection.execute 'truncate locations;'
     ActiveRecord::Base.connection.execute 'truncate routes;'
@@ -24,7 +26,7 @@ Dir.mktmpdir do |dir|
 
   puts 'Parsing routes'
   ActiveRecord::Base.transaction do
-    File.open("#{dir}/routes.txt", "r").each_line do |line|
+    File.open("#{dir}/routes.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'route_id' then next end
 
       Route.import line
@@ -36,7 +38,7 @@ Dir.mktmpdir do |dir|
 
   puts 'Parsing stops'
   ActiveRecord::Base.transaction do
-    File.open("#{dir}/stops.txt", "r").each_line do |line|
+    File.open("#{dir}/stops.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'stop_id' then next end
 
       Stop.import line
@@ -48,7 +50,7 @@ Dir.mktmpdir do |dir|
 
   puts 'Parsing trips'
   ActiveRecord::Base.transaction do
-    File.open("#{dir}/trips.txt", "r").each_line do |line|
+    File.open("#{dir}/trips.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'route_id' then next end
 
       Trip.import line
@@ -60,7 +62,7 @@ Dir.mktmpdir do |dir|
 
   puts 'Parsing schedules'
   ActiveRecord::Base.transaction do
-    File.open("#{dir}/stop_times.txt", "r").each_line do |line|
+    File.open("#{dir}/stop_times.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'trip_id' then next end
 
       Schedule.import line
