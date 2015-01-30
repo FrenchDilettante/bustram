@@ -12,12 +12,19 @@ Dir.mktmpdir do |dir|
     ActiveRecord::Base.connection.execute 'truncate trips;'
   end
 
+  location_ids = Hash.new
+  route_ids = Hash.new
+  stop_ids = Hash.new
+  timeframe_ids = Hash.new
+  trip_ids = Hash.new
+
   puts 'Parsing timeframes'
   ActiveRecord::Base.transaction do
     File.open("#{dir}/calendar.txt", "r").each_line do |line|
       if line.start_with? 'service_id' then next end
 
-      Timeframe.import line
+      timeframe = Timeframe.import line
+      timeframe_ids[timeframe.code] = timeframe.id
     end
   end
 
@@ -29,7 +36,8 @@ Dir.mktmpdir do |dir|
     File.open("#{dir}/routes.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'route_id' then next end
 
-      Route.import line
+      route = Route.import line
+      route_ids[route.code] = route.id
     end
   end
 
@@ -41,7 +49,11 @@ Dir.mktmpdir do |dir|
     File.open("#{dir}/stops.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'stop_id' then next end
 
-      Stop.import line
+      stop = Stop.import line
+      stop.locations.each do |location|
+        location_ids[location.code] = location.id
+        stop_ids[location.code] = stop.id
+      end
     end
   end
 
@@ -53,7 +65,8 @@ Dir.mktmpdir do |dir|
     File.open("#{dir}/trips.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'route_id' then next end
 
-      Trip.import line
+      trip = Trip.import line, route_ids, timeframe_ids
+      trip_ids[trip.code] = trip.id
     end
   end
   
@@ -65,7 +78,7 @@ Dir.mktmpdir do |dir|
     File.open("#{dir}/stop_times.txt", "r:iso-8859-1").each_line do |line|
       if line.start_with? 'trip_id' then next end
 
-      Schedule.import line
+      Schedule.import line, location_ids, stop_ids, trip_ids
     end
   end
 

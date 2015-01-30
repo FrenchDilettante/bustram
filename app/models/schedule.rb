@@ -3,18 +3,25 @@ class Schedule < ActiveRecord::Base
   belongs_to :stop
   belongs_to :trip
 
-  def self.import line
+  def self.import line, location_ids, stop_ids, trip_ids
     parts = line.split ','
 
-    schedule = Schedule.new
-    schedule.location = Location.find_by_code parts[3]
-    schedule.stop = schedule.location.stop
-    schedule.trip = Trip.find_by_code parts[0]
-    schedule.departure_time = self.parse_time parts[2]
-    schedule.stop_sequence = parts[4].to_i
-
-    schedule.save!
-    schedule
+    ActiveRecord::Base.connection.execute "
+      INSERT INTO schedules (
+        location_id,
+        stop_id,
+        trip_id,
+        departure_time,
+        stop_sequence
+      )
+      VALUES (
+        #{location_ids[parts[3]]},
+        #{stop_ids[parts[3]]},
+        #{trip_ids[parts[0]]},
+        #{self.parse_time(parts[2])},
+        #{parts[4].to_i}
+      )
+    "
   end
 
   def self.next stop

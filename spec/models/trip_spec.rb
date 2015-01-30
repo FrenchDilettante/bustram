@@ -5,7 +5,7 @@ RSpec.describe Trip, :type => :model do
   correct_timeframe = nil
 
   before(:each) do
-    correct_route = Route.import '1d-131,1d,"DJF  Val de Maine > Eventard",,3,'
+    correct_route = Route.import '"1d-131,1d,""DJF  Val de Maine > Eventard"",,3,"'
     correct_timeframe = Timeframe.import '2015H-DJF_01-Dimanche-71,0,0,0,0,0,0,1,20141109,20141207'
   end
 
