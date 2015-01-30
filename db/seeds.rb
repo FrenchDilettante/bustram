@@ -6,6 +6,7 @@ Dir.mktmpdir do |dir|
   ActiveRecord::Base.transaction do
     ActiveRecord::Base.connection.execute 'truncate locations;'
     ActiveRecord::Base.connection.execute 'truncate routes;'
+    ActiveRecord::Base.connection.execute 'truncate routes_stops;'
     ActiveRecord::Base.connection.execute 'truncate stops;'
     ActiveRecord::Base.connection.execute 'truncate schedules;'
     ActiveRecord::Base.connection.execute 'truncate timeframes;'
@@ -83,5 +84,15 @@ Dir.mktmpdir do |dir|
   end
 
   puts "#{Schedule.all.count} schedules imported"
+
+
+  puts 'Mapping stops to routes'
+
+  ActiveRecord::Base.connection.execute '
+    insert into routes_stops (stop_id, route_id)
+    select distinct stop_id, route_id
+    from schedules
+    inner join trips on (schedules.trip_id = trips.id)
+    order by 1, 2'
 
 end

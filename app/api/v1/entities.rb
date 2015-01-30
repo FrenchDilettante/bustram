@@ -31,6 +31,7 @@ module V1
     class Stop < Grape::Entity
       expose :slug, as: :id
       expose :name
+      expose :routes, using: Route, as: :routes
     end
 
     class FullStop < Stop

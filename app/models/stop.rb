@@ -2,6 +2,7 @@ class Stop < ActiveRecord::Base
   extend FriendlyId
   friendly_id :name, use: :slugged
   has_many :locations
+  has_and_belongs_to_many :routes
 
   def self.import line
     parts = line.split ','
@@ -27,7 +28,7 @@ class Stop < ActiveRecord::Base
   end
 
   def self.search name
-    self.where('slug like :name', name: "%#{name.parameterize}%").order(:name)
+    self.where('slug like :name', name: "%#{name.parameterize}%").order(:name).includes(:routes)
   end
 
 end
