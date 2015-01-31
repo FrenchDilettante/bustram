@@ -11,10 +11,16 @@
            ng-model-options="{ debounce: {'default': 200, 'blur': 0} }" />
   </div>
 
-  <ul class="stop-list">
+  <ul class="stop-list nav nav-pills nav-stacked">
     <li ng-repeat="stop in stops">
       <a ng-href="/arrets/{{ stop.id }}">
         {{ stop.name }}
+
+        <ul class="route-list">
+          <li class="badge" ng-repeat="route in stop.routes">
+            {{ route.id }}
+          </li>
+        </ul>
       </a>
     </li>
   </ul>
