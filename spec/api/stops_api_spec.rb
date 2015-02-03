@@ -4,8 +4,9 @@ describe V1::StopsApi do
   stop_test = nil
 
   before(:each) do
-    stop_test = Stop.create name: 'Stop Test'
-    Stop.create name: 'Another Stop'
+    route = Route.new sub_route: false
+    stop_test = Stop.create name: 'Stop Test', routes: [route]
+    Stop.create name: 'Another Stop', routes: [route]
   end
 
   describe 'GET /api/v1/stops' do

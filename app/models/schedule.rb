@@ -35,7 +35,7 @@ class Schedule < ActiveRecord::Base
       }).
       limit(10).
       order('departure_time').
-      includes(:trip => [:route])
+      eager_load(:trip => [:route])
   end
 
   def parsed_departure_time
