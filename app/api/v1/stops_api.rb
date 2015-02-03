@@ -18,7 +18,7 @@ module V1
         search_query = params[:q]
 
         if search_query.blank? or search_query.length < 3
-          stops = Stop.all
+          stops = Stop.all.includes :routes
         else
           stops = Stop.search search_query
         end

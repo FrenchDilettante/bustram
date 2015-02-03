@@ -28,7 +28,11 @@ class Stop < ActiveRecord::Base
   end
 
   def self.search name
-    self.where('slug like :name', name: "%#{name.parameterize}%").order(:name).includes(:routes)
+    self
+      .eager_load(:routes)
+      .where('slug like :name', name: "%#{name.parameterize}%")
+      .where(routes: {sub_route: false})
+      .order('name, routes.short_name')
   end
 
 end
