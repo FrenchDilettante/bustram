@@ -37,7 +37,7 @@ describe V1::StopsApi do
       expect(response.status).to be(200)
       parsed = JSON.parse response.body
       expect(parsed['name']).to eq('Stop Test')
-      expect(parsed.keys).to eq(['id', 'name', 'locations', 'routes'])
+      expect(parsed.keys).to eq(['id', 'name', 'routes', 'locations'])
     end
 
     it 'should throw a 404 if not found' do
