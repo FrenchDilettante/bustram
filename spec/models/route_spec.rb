@@ -10,6 +10,7 @@ RSpec.describe Route, :type => :model do
       expect(route.long_name).to eq('DJF Murs ERIGNE <> AquaVita <> Monplaisir')
       expect(route.code).to eq('3d-131')
       expect(route.transport_type).to eq('B')
+      expect(route.sub_route).to be(true)
 
       expect(Route.all.count).to be(1)
     end
@@ -17,6 +18,7 @@ RSpec.describe Route, :type => :model do
     it 'should have bus and tram routes' do
       route = Route.import 'A-131,A,"ARDENNE - ROSERAIE",,0,'
       expect(route.transport_type).to eq('T')
+      expect(route.sub_route).to be(false)
     end
 
   end
