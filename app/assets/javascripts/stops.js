@@ -8,7 +8,20 @@ module.controller('StopController',
       return location.pathname.split('/')[2];
     }
 
-    function loadSchedules() {
+    function setTimer() {
+      var date = new Date();
+      date.setMilliseconds(0);
+      date.setSeconds(0);
+      date.setMinutes(date.getMinutes() + 1);
+
+      $timeout($scope.loadSchedules, date.getTime() - new Date().getTime());
+    }
+
+    $scope.estimatedTime = function (time) {
+      return Math.floor((time - new Date()) / 60000);
+    };
+
+    $scope.loadSchedules = function () {
       $http.
         get('/api/v1/stops/' + getCurrentStopId() + '/schedules').
         then(function (response) {
@@ -18,17 +31,8 @@ module.controller('StopController',
           });
         });
 
-      var date = new Date();
-      date.setMilliseconds(0);
-      date.setSeconds(0);
-      date.setMinutes(date.getMinutes() + 1);
-
-      $timeout(loadSchedules, date.getTime() - new Date().getTime());
+      setTimer();
     }
-
-    $scope.estimatedTime = function (time) {
-      return Math.floor((time - new Date()) / 60000);
-    };
 
     $scope.toggleDisplay = function () {
       $scope.showDeparture = !$scope.showDeparture;
@@ -36,7 +40,7 @@ module.controller('StopController',
 
     $scope.showDeparture = false;
 
-    loadSchedules();
+    $scope.loadSchedules();
   }]);
 
 module.filter('remaining',
